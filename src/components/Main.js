@@ -1,19 +1,22 @@
 import { CompletedChart, InProgressChart } from "./Chart";
-import Task from "./Task";
+import Tasks from "./Tasks";
+import Notes from "../Notes";
+import Projects from "./Projects";
 
-function Main() {
+function Main(props) {
+  
   return (
     <main>
       <header>
         <h2>Dashboard</h2>
         <div className="buttons">
-          <button>
+          <button id="taskForm" onClick={props.formHandler}>
             <i className="fa-solid fa-plus"></i> New Task
           </button>
-          <button>
+          <button id="projectForm" onClick={props.formHandler}>
             <i className="fa-solid fa-plus"></i> New Project
           </button>
-          <button>
+          <button id="noteForm" onClick={props.formHandler}>
             <i className="fa-solid fa-plus"></i> New Note
           </button>
         </div>
@@ -40,13 +43,9 @@ function Main() {
           </div>
         </div>
       </div>
-      <div className="view">
-        <h4>Tasks</h4>
-        <Task />
-        <Task />
-        <Task />
-        <Task />
-      </div>
+     {props.view === 'tasks' && <Tasks></Tasks>}
+      {props.view === 'notes' && <Notes></Notes>}
+      {props.view === 'projects' && <Projects projects={props.projects}/>}
     </main>
   );
 }

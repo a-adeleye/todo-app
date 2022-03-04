@@ -1,13 +1,14 @@
-function Navigation() {
+function Navigation(props) {
   return (
     <section className="navigation">
       <div className="profile">
-          <div className="box">U</div>
-          <p>Hi User</p></div>
+        <div className="box">U</div>
+        <p>Hi User</p>
+      </div>
       <ul className="nav-items">
-        <li>
-          <i className="fa-solid fa-chart-pie"></i>
-          <span>Dashboard</span>
+        <li onClick={props.handleClick} id="tasks">
+          <i id="tasks" className="fa-solid fa-chart-pie"></i>
+          <span id="tasks">Dashboard</span>
         </li>
         <li>
           <i className="fa-solid fa-calendar-day"></i>
@@ -21,13 +22,13 @@ function Navigation() {
           <i className="fa-solid fa-calendar-days"></i>
           <span>This Month</span>
         </li>
-        <li>
-          <i className="fa-solid fa-bars-progress"></i>
-          <span>Projects</span>
+        <li onClick={props.handleClick} id="projects">
+          <i id="projects" className="fa-solid fa-bars-progress"></i>
+          <span id="projects">Projects</span>
         </li>
-        <li>
-          <i className="fa-solid fa-clipboard"></i>
-          <span>Notes</span>
+        <li onClick={props.handleClick} id="notes">
+          <i id="notes" className="fa-solid fa-clipboard"></i>
+          <span id="notes">Notes</span>
         </li>
       </ul>
       <div className="nav-toggle">

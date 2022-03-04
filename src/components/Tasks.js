@@ -15,4 +15,16 @@ function Task() {
   );
 }
 
-export default Task;
+function Tasks() {
+  return (
+    <section className="tasks">
+      <h4>Tasks</h4>
+      <Task />
+      <Task />
+      <Task />
+      <Task />
+    </section>
+  );
+}
+
+export default Tasks;

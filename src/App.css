@@ -166,7 +166,9 @@ button:active {
   border-radius: 50%;
 }
 
-.view {
+.tasks,
+.notes,
+.projects {
   background-color: #2e384e;
   height: 100%;
   width: 100%;
@@ -180,11 +182,11 @@ button:active {
   -ms-overflow-style: none;
 }
 
-.view::-webkit-scrollbar {
+.tasks::-webkit-scrollbar {
   display: none;
 }
 
-.view > h4 {
+.tasks > h4 {
   color: #ffffff;
 }
 
@@ -224,6 +226,48 @@ button:active {
   cursor: pointer;
   height: 1.2em;
   width: 1.2em;
+}
+
+.notes-container,
+.projects-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1em;
+}
+
+.notes > h4 {
+  color: #ffffff;
+}
+
+.note {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1em;
+  width: 210px;
+  height: 210px;
+  border-radius: 8px;
+  padding: 1em;
+  font-size: 0.9em;
+  background-color: #222c41;
+}
+
+.projects > h4 {
+  color: #ffffff;
+}
+
+.project {
+  padding: 0.5em 2em;
+  background-color: #222c41;
+  border-radius: 8px;
+  color: #75797c;
+}
+
+.note > h5 {
+  color: #ffffff;
+}
+
+.note > p {
+  color: #75797c;
 }
 
 .right-bar,
@@ -269,4 +313,44 @@ button:active {
   width: 70px;
   background-color: #7778e0;
   border-radius: 50%;
+}
+
+.form-container {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+form {
+  display: flex;
+}
+
+.project-form {
+  flex-direction: column;
+  height: 170px;
+  width: 300px;
+  gap: 1em;
+  border-radius: 4px;
+  padding: 1em;
+  background-color: #ffffff;
+}
+
+.project-form i {
+  text-align: center;
+  cursor: pointer;
+}
+
+.project-form input {
+  padding: 0.5em 1em;
+  display: block;
+  margin-top: 0.2em;
+  width: 100%;
 }
