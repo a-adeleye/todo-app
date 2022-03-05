@@ -29,6 +29,7 @@ function App() {
     if(editingOn){
       toggleEditing()
       resetTaskData();
+      resetNoteData();
     }
   }
 
@@ -64,15 +65,31 @@ function App() {
 
   function addNote() {
     setNotes((prev) => [...prev, noteData]);
-    resetNote();
+    resetNoteData();
   }
 
-  function resetNote() {
+  function resetNoteData() {
     setNoteData(
       (prev) => (prev = { ...prev, id: nanoid(), title: "", noteText: "" })
     );
   }
 
+  function deleteNote(){
+console.log("delete")
+  }
+
+  function editNote(e, param){
+    toggleEditing();
+    showForm(param);
+    const currentNote = notes.filter(note => note.id === e.target.id);
+    setNoteData(prev => prev = {...prev, ...currentNote[0]})
+  }
+
+  function updateNote() {
+    setNotes(prev => prev.map(note => note.id === noteData.id ? noteData : note));
+    toggleEditing();
+    resetNoteData();
+  }
   // Tasks
 
   const [tasks, setTasks] = React.useState([]);
@@ -125,7 +142,7 @@ function App() {
     setTaskData(prev => prev = {...prev, ...currentTask[0]})
   }
 
-  function updateTask(e){
+  function updateTask(){
     setTasks(prev => prev.map(task => task.id === taskData.id ? taskData : task));
     toggleEditing();
     resetTaskData();
@@ -151,6 +168,8 @@ function App() {
         deleteTask={deleteTask}
         editTask ={editTask}
         completeTask={completeTask}
+        editNote={editNote}
+        deleteNote={deleteNote}
       />
       <RightBar />
       {form === "projectForm" && (
@@ -159,6 +178,7 @@ function App() {
           onClick={addProject}
           value={projectText}
           hide={hideForm}
+          editingOn ={editingOn}
         />
       )}
       {form === "noteForm" && (
@@ -168,6 +188,8 @@ function App() {
           title={noteData.title}
           body={noteData.noteText}
           hide={hideForm}
+          editingOn ={editingOn}
+          update={updateNote}
         />
       )}
       {form === "taskForm" && (

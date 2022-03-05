@@ -274,6 +274,18 @@ button:active {
 
 .note > p {
   color: #93979b;
+  margin-bottom: auto;
+}
+
+.note-actions {
+  display: flex;
+  gap: 1em;
+  align-self: flex-end;
+}
+
+.note-actions i {
+  cursor: pointer;
+  color: #93979b;
 }
 
 .right-bar,
