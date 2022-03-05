@@ -154,7 +154,7 @@ console.log("delete")
     setTasks(prev => prev.map(task => task.id === id ? {...task, completed: checked} : task))
   }
 
-  console.table(tasks)
+  console.table(notes)
 
   return (
     <div className="App">
@@ -184,7 +184,7 @@ console.log("delete")
       {form === "noteForm" && (
         <NoteForm
           onChange={handleNoteChange}
-          onClick={addNote}
+          add={addNote}
           title={noteData.title}
           body={noteData.noteText}
           hide={hideForm}

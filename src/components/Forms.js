@@ -50,7 +50,7 @@ function NoteForm(props) {
             placeholder="Note content"
           ></textarea>
         </label>
-        <button type="button" onClick={props.onClick}>
+        <button type="button" onClick= {props.editingOn ? props.update : props.add}>
           {props.editingOn ? 'Update Note' : 'Add Note'}
         </button>
       </form>
