@@ -1,7 +1,7 @@
 import { nanoid } from "nanoid";
 
 function Task(props) {
-  const { id, title, task, completed, project, dueDate, deleteTask, editTask } = props;
+  const { id, title, task, completeTask, project, dueDate, deleteTask, editTask, completed } = props;
 
   return (
     <div className="task">
@@ -15,7 +15,7 @@ function Task(props) {
         <p>Due Date: <span>{dueDate}</span></p>
       </div>
       <div className="task-actions">
-        <input type="checkbox" id={id} />
+        <input type="checkbox" id={id} onChange={(e) => completeTask(e)} checked={completed}/>
         <i className="fa-solid fa-pen-to-square" id={id} onClick={(e) => editTask(e,"taskForm")}></i>
         <i className="fa-solid fa-trash" id={id} onClick={deleteTask}></i>
       </div>
@@ -24,7 +24,7 @@ function Task(props) {
 }
 
 function Tasks(props) {
-  const { tasks, deleteTask, editTask } = props;
+  const { tasks, deleteTask, editTask, completeTask } = props;
 
   const taskList = tasks.map((task) => (
     <Task
@@ -34,8 +34,10 @@ function Tasks(props) {
       id={task.id}
       project={task.project}
       dueDate={task.dueDate}
+      completed={task.completed}
       deleteTask={deleteTask}
       editTask={editTask}
+      completeTask={completeTask}
     />
   ));
 

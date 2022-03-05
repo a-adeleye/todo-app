@@ -25,7 +25,7 @@ function App() {
   }
 
   function hideForm() {
-    setForm((prev) => (prev = ""));
+    setForm(prev => prev = "");
     if(editingOn){
       toggleEditing()
       resetTaskData();
@@ -109,6 +109,7 @@ function App() {
           task: "",
           project: "",
           dueDate: "",
+          completed: false,
         })
     );
   }
@@ -130,7 +131,13 @@ function App() {
     resetTaskData();
   }
 
-  //console.log(taskData)
+  function completeTask(e){
+    const {id, checked} = e.target;
+    console.log(checked)
+    setTasks(prev => prev.map(task => task.id === id ? {...task, completed: checked} : task))
+  }
+
+  console.table(tasks)
 
   return (
     <div className="App">
@@ -143,6 +150,7 @@ function App() {
         tasks={tasks}
         deleteTask={deleteTask}
         editTask ={editTask}
+        completeTask={completeTask}
       />
       <RightBar />
       {form === "projectForm" && (
