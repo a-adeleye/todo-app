@@ -190,7 +190,7 @@ function App() {
           id: nanoid(),
           title: "",
           task: "",
-          project: "",
+          project: "General",
           dueDate: "",
           completed: false,
         })

@@ -17,7 +17,7 @@ function CompletedChart(props) {
         },
         text: {
           fill: "#75797c",
-          fontSize: "19px",
+          fontSize: "25px",
         },
         background: {
           fill: "none",
@@ -42,7 +42,7 @@ function InProgressChart(props){
         },
         text: {
           fill: "#75797c",
-          fontSize: "19px",
+          fontSize: "25px",
         },
         background: {
           fill: "none",

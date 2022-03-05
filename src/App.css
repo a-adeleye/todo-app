@@ -51,9 +51,10 @@ body {
   list-style-type: none;
 }
 
-.nav-items li {
+.nav-item {
   cursor: pointer;
   font-size: 0.8em;
+  display: flex;
 }
 
 .nav-items i {
@@ -310,6 +311,7 @@ button:active {
 
 .right-bar {
   height: 100%;
+  padding-bottom: 2em;
 }
 
 .pro {
@@ -450,4 +452,142 @@ select {
   color: green;
   font-size: 4em;
   font-weight: bold;
+}
+
+@media only screen and (max-width: 1093px) {
+  .stat > i,
+  .task > i {
+    font-size: 1.7em;
+    height: 50px;
+    width: 50px;
+    min-width: 50px;
+  }
+
+  .stat--chart {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+  }
+}
+
+@media only screen and (max-width: 1050px) {
+  .stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+    width: 100%;
+  }
+
+  .stat {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    background-color: #2e384e;
+    padding: 1em 1em;
+    border-radius: 20px;
+    gap: 1em;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .App {
+    flex-wrap: wrap;
+    gap: 1em;
+    padding-top: 2em;
+  }
+  main {
+    width: 100%;
+  }
+
+  .navigation {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .nav-items {
+    flex-direction: row;
+  }
+
+  .nav-item {
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .nav-item i,
+  .nav-item span {
+    width: 100%;
+    margin: 0;
+  }
+
+  .nav-toggle {
+    display: none;
+  }
+
+  .profile {
+    display: none;
+  }
+
+  .right-bar {
+    flex-direction: row;
+    width: 100%;
+    height: unset;
+  }
+}
+
+@media only screen and (max-width: 712px) {
+  .App {
+    padding-top: 3em;
+  }
+
+  .right-bar {
+    flex-direction: row;
+    width: 100%;
+    height: unset;
+  }
+
+  .task {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5em;
+  }
+
+  .task-details,
+  .more-details {
+    flex-basis: 100%;
+    text-align: center;
+  }
+}
+
+@media only screen and (max-width: 544px) {
+  .navigation {
+    height: unset;
+  }
+
+  .nav-items {
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+  }
+
+  .nav-item {
+    flex-basis: 23%;
+  }
+
+  .right-bar {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  header {
+    flex-wrap: wrap-reverse;
+    gap: 1em;
+  }
+
+  .buttons {
+    flex-basis: 100%;
+    justify-content: center;
+  }
 }
