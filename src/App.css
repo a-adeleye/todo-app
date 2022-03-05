@@ -125,6 +125,10 @@ button:active {
   width: 100%;
 }
 
+.stat.one-column {
+  width: 100%;
+}
+
 .stat {
   display: flex;
   align-items: center;
@@ -157,7 +161,7 @@ button:active {
 }
 
 .stat--details p {
-  color: #75797c;
+  color: #93979b;
 }
 
 .stat--chart {
@@ -172,7 +176,7 @@ button:active {
   background-color: #2e384e;
   height: 100%;
   width: 100%;
-  padding: 1em 2em;
+  padding: 1em 1em;
   border-radius: 20px;
   display: flex;
   flex-direction: column;
@@ -267,7 +271,7 @@ button:active {
 }
 
 .note > p {
-  color: #75797c;
+  color: #93979b;
 }
 
 .right-bar,
@@ -342,20 +346,45 @@ form {
   background-color: #ffffff;
 }
 
-.one-column-form i {
+.one-column-form i,
+.two-column-form i {
   text-align: center;
   cursor: pointer;
 }
 
-input[type="text"],
-textarea {
+[type="text"],
+textarea,
+select,
+[type="date"] {
   padding: 0.5em 1em;
   display: block;
   margin-top: 0.2em;
   width: 100%;
+  font-family: inherit;
 }
 
 textarea {
   height: 100px;
-  font-family: inherit;
+}
+
+select {
+  cursor: pointer;
+}
+
+.two-column-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 500px;
+  gap: 1em;
+  border-radius: 4px;
+  padding: 2em;
+  background-color: #ffffff;
+}
+
+.two-column-form i {
+  grid-column: 1 / span 2;
+}
+
+.two-column-form button {
+  grid-column: 1 / span 2;
 }

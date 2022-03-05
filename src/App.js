@@ -4,18 +4,16 @@ import Navigation from "./components/Navigation";
 import { nanoid } from "nanoid";
 import Main from "./components/Main";
 import RightBar from "./components/RightBar";
-import { ProjectForm, NoteForm } from "./Forms";
+import { ProjectForm, NoteForm, TaskForm } from "./components/Forms";
 
 function App() {
-
   //View
 
   const [view, setView] = React.useState("tasks");
-  
+
   function selectView(e) {
     const { id } = e.target;
     setView((prev) => (prev = id));
-    console.log(id);
   }
 
   // Form display
@@ -23,7 +21,6 @@ function App() {
 
   function showForm(e) {
     setForm((prev) => (prev = e.target.id));
-    console.log(form);
   }
 
   function hideForm() {
@@ -56,8 +53,8 @@ function App() {
   });
 
   function handleNoteChange(e) {
-    const {name, value} = e.target;
-    setNoteData((prev) => (prev = {...noteData,[name]: value}));
+    const { name, value } = e.target;
+    setNoteData((prev) => (prev = { ...noteData, [name]: value }));
   }
 
   function addNote() {
@@ -66,13 +63,50 @@ function App() {
   }
 
   function resetNote() {
-    setNoteData((prev) => (prev = {...prev, id: nanoid(), title: "", noteText: ""}));
+    setNoteData(
+      (prev) => (prev = { ...prev, id: nanoid(), title: "", noteText: "" })
+    );
   }
+
+  // Tasks
+
+  const [tasks, setTasks] = React.useState([]);
+  const [taskData, setTaskData] = React.useState({
+    id: nanoid(),
+    title: "",
+    task: "",
+    project: "",
+    dueDate: "",
+  });
+
+  function handleTaskChange(e) {
+    const { name, value } = e.target;
+    setTaskData((prev) => (prev = { ...taskData, [name]: value }));
+  }
+
+  function addTask() {
+    setTasks((prev) => [...prev, taskData]);
+    resetTask();
+  }
+
+  function resetTask() {
+    setTaskData(
+      (prev) => (prev = { ...prev, id: nanoid(), title: "", task: "",project: "",
+      dueDate: "", })
+    );
+  }
+
+  console.log(tasks)
 
   return (
     <div className="App">
       <Navigation handleClick={selectView} />
-      <Main view={view} formHandler={showForm} projects={projects} notes={notes}/>
+      <Main
+        view={view}
+        formHandler={showForm}
+        projects={projects}
+        notes={notes}
+      />
       <RightBar />
       {form === "projectForm" && (
         <ProjectForm
@@ -81,7 +115,6 @@ function App() {
           value={projectText}
           hide={hideForm}
         />
-        
       )}
       {form === "noteForm" && (
         <NoteForm
@@ -91,7 +124,18 @@ function App() {
           body={noteData.noteText}
           hide={hideForm}
         />
-        
+      )}
+      {form === "taskForm" && (
+        <TaskForm
+          projects={projects}
+          hide={hideForm}
+          onChange={handleTaskChange}
+          onClick={addTask}
+          title={taskData.title}
+          task={taskData.task}
+          project={taskData.project}
+          dueDate={taskData.dueDate}
+        />
       )}
     </div>
   );

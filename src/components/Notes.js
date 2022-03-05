@@ -14,7 +14,6 @@ function Notes(props) {
 
   return (
     <section className="notes">
-      <h4>Notes</h4>
       <div className="notes-container">
         {noteItems}
       </div>

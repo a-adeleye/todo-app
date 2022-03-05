@@ -1,10 +1,9 @@
-import { CompletedChart, InProgressChart } from "./Chart";
 import Tasks from "./Tasks";
-import Notes from "../Notes";
+import Notes from "./Notes";
 import Projects from "./Projects";
+import { TaskStats, NoteStats, ProjectStats } from "./Stats";
 
 function Main(props) {
-  
   return (
     <main>
       <header>
@@ -21,31 +20,12 @@ function Main(props) {
           </button>
         </div>
       </header>
-      <div className="stats">
-        <div className="stat">
-          <i className="fa-solid fa-check-double"></i>
-          <div className="stat--details">
-            <h4>12 Tasks</h4>
-            <p>Completed</p>
-          </div>
-          <div className="stat--chart">
-            <CompletedChart percentage="100" />
-          </div>
-        </div>
-        <div className="stat">
-          <i className="fa-solid fa-boxes-stacked"></i>
-          <div className="stat--details">
-            <h4>4 Tasks</h4>
-            <p>In Progress</p>
-          </div>
-          <div className="stat--chart">
-            <InProgressChart percentage="50" />
-          </div>
-        </div>
-      </div>
-     {props.view === 'tasks' && <Tasks></Tasks>}
-      {props.view === 'notes' && <Notes notes={props.notes}/>}
-      {props.view === 'projects' && <Projects projects={props.projects}/>}
+      {props.view === "tasks" && <TaskStats notes={props.notes} />}
+      {props.view === "notes" && <NoteStats notes={props.notes} />}
+      {props.view === "projects" && <ProjectStats projects={props.projects} />}
+      {props.view === "tasks" && <Tasks></Tasks>}
+      {props.view === "notes" && <Notes notes={props.notes} />}
+      {props.view === "projects" && <Projects projects={props.projects} />}
     </main>
   );
 }

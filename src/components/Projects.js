@@ -9,7 +9,6 @@ function Projects(props) {
 
   return (
     <section className="projects">
-      <h4>Projects</h4>
       <div className="projects-container">{projectItems}</div>
     </section>
   );
