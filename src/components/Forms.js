@@ -114,8 +114,8 @@ function TaskForm(props) {
             value={props.dueDate}
           ></input>
         </label>
-        <button type="button" onClick={props.onClick}>
-          Add Task
+        <button type="button" onClick={props.editingOn ? props.update : props.add}>
+          {props.editingOn ? 'Update Task' : 'Add Task'}
         </button>
       </form>
     </div>

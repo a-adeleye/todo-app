@@ -10,6 +10,7 @@ function App() {
   //View
 
   const [view, setView] = React.useState("Tasks");
+  const [editingOn, setEditingOn] = React.useState(false);
 
   function selectView(e) {
     const { id } = e.target;
@@ -19,12 +20,16 @@ function App() {
   // Form display
   const [form, setForm] = React.useState("");
 
-  function showForm(e) {
-    setForm((prev) => (prev = e.target.id));
+  function showForm(param) {
+    setForm((prev) => (prev = param));
   }
 
   function hideForm() {
     setForm((prev) => (prev = ""));
+    if(editingOn){
+      toggleEditing()
+      resetTaskData();
+    }
   }
 
   // Projects
@@ -87,14 +92,14 @@ function App() {
 
   function addTask() {
     setTasks((prev) => [...prev, taskData]);
-    resetTask();
+    resetTaskData();
   }
 
   function deleteTask(e) {
     setTasks((prev) => (prev = prev.filter((task) => task.id !== e.target.id)));
   }
 
-  function resetTask() {
+  function resetTaskData() {
     setTaskData(
       (prev) =>
         (prev = {
@@ -108,7 +113,24 @@ function App() {
     );
   }
 
-  console.log(tasks);
+  function toggleEditing(){
+    setEditingOn(prev => prev =! prev)
+  }
+
+  function editTask(e, param){
+    toggleEditing();
+    showForm(param);
+    const currentTask = tasks.filter(task => task.id === e.target.id);
+    setTaskData(prev => prev = {...prev, ...currentTask[0]})
+  }
+
+  function updateTask(e){
+    setTasks(prev => prev.map(task => task.id === taskData.id ? taskData : task));
+    toggleEditing();
+    resetTaskData();
+  }
+
+  //console.log(taskData)
 
   return (
     <div className="App">
@@ -120,6 +142,7 @@ function App() {
         notes={notes}
         tasks={tasks}
         deleteTask={deleteTask}
+        editTask ={editTask}
       />
       <RightBar />
       {form === "projectForm" && (
@@ -144,11 +167,13 @@ function App() {
           projects={projects}
           hide={hideForm}
           onChange={handleTaskChange}
-          onClick={addTask}
+          add={addTask}
+          update={updateTask}
           title={taskData.title}
           task={taskData.task}
           project={taskData.project}
           dueDate={taskData.dueDate}
+          editingOn ={editingOn}
         />
       )}
     </div>

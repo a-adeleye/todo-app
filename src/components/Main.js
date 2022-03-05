@@ -4,19 +4,19 @@ import Projects from "./Projects";
 import { TaskStats, NoteStats, ProjectStats } from "./Stats";
 
 function Main(props) {
-  const { view, tasks, notes, projects, formHandler, deleteTask } = props;
+  const { view, tasks, notes, projects, formHandler, deleteTask, editTask } = props;
   return (
     <main>
       <header>
         <h2>{view}</h2>
         <div className="buttons">
-          <button id="taskForm" onClick={formHandler}>
+          <button id="taskForm" onClick={() => formHandler("taskForm")}>
             <i className="fa-solid fa-plus"></i> New Task
           </button>
-          <button id="projectForm" onClick={formHandler}>
+          <button id="projectForm" onClick={() => formHandler("projectForm")}>
             <i className="fa-solid fa-plus"></i> New Project
           </button>
-          <button id="noteForm" onClick={formHandler}>
+          <button id="noteForm" onClick={() => formHandler("noteForm")}>
             <i className="fa-solid fa-plus"></i> New Note
           </button>
         </div>
@@ -24,7 +24,7 @@ function Main(props) {
       {view === "Tasks" && <TaskStats tasks={tasks} /> }
       {view === "Notes" && <NoteStats notes={notes} />}
       {view === "Projects" && <ProjectStats projects={projects} />}
-      {view === "Tasks" && <Tasks tasks={tasks} deleteTask={deleteTask}/>}
+      {view === "Tasks" && <Tasks tasks={tasks} deleteTask={deleteTask} editTask={editTask}/>}
       {view === "Notes" && <Notes notes={notes} />}
       {view === "Projects" && <Projects projects={projects} />}
     </main>
