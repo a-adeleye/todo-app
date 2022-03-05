@@ -47,12 +47,18 @@ function App() {
   }
 
   function addProject() {
-    setProjects((prev) => [...prev, projectData]);
-    hideForm();
-    displaySuccess();
-    setView((prev) => (prev = "Projects"));
-    resetProjectData();
-    setFilter((prev) => (prev = { ...prev, state: false, value: "Projects" }));
+    if (projectData.name === "") {
+      alert("Field can not be empty");
+    } else {
+      setProjects((prev) => [...prev, projectData]);
+      hideForm();
+      displaySuccess();
+      setView((prev) => (prev = "Projects"));
+      resetProjectData();
+      setFilter(
+        (prev) => (prev = { ...prev, state: false, value: "Projects" })
+      );
+    }
   }
 
   function resetProjectData() {
@@ -100,12 +106,16 @@ function App() {
   }
 
   function addNote() {
-    setNotes((prev) => [...prev, noteData]);
-    hideForm();
-    displaySuccess();
-    setView((prev) => (prev = "Notes"));
-    setFilter((prev) => (prev = { ...prev, state: false, value: "Notes" }));
-    resetNoteData();
+    if (noteData.title === "" || noteData.noteText === "") {
+      alert("Fields can not be empty");
+    } else {
+      setNotes((prev) => [...prev, noteData]);
+      hideForm();
+      displaySuccess();
+      setView((prev) => (prev = "Notes"));
+      setFilter((prev) => (prev = { ...prev, state: false, value: "Notes" }));
+      resetNoteData();
+    }
   }
 
   function resetNoteData() {
@@ -152,12 +162,20 @@ function App() {
   }
 
   function addTask() {
-    setTasks((prev) => [...prev, taskData]);
-    hideForm();
-    displaySuccess();
-    setView((prev) => (prev = "Tasks"));
-    setFilter((prev) => (prev = { ...prev, state: false, value: "Tasks" }));
-    resetTaskData();
+    if (
+      taskData.title === "" ||
+      taskData.task === "" ||
+      taskData.dueDate === ""
+    ) {
+      alert("Fields can not be empty");
+    } else {
+      setTasks((prev) => [...prev, taskData]);
+      hideForm();
+      displaySuccess();
+      setView((prev) => (prev = "Tasks"));
+      setFilter((prev) => (prev = { ...prev, state: false, value: "Tasks" }));
+      resetTaskData();
+    }
   }
 
   function deleteTask(e) {
