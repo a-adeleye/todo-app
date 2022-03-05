@@ -54,7 +54,6 @@ body {
 .nav-items li {
   cursor: pointer;
   font-size: 0.8em;
-  color: #75797c;
 }
 
 .nav-items i {
@@ -62,11 +61,7 @@ body {
   margin-right: 1em;
 }
 
-.fa-boxes-stacked {
-  color: #fdc049;
-}
-
-li:first-child {
+.active-link {
   color: #6a69e0;
   font-weight: bold;
 }

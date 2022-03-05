@@ -16,7 +16,7 @@ function App() {
   function selectView(e) {
     const { id } = e.target;
     setView((prev) => (prev = id));
-    setFilter((prev) => (prev = { ...prev, state: false, value: "Tasks" }));
+    setFilter((prev) => (prev = { ...prev, state: false, value: id }));
   }
 
   // Form display
@@ -212,16 +212,19 @@ function App() {
     }
   }, [filter, tasks]);
 
-  function today() {
+  function today(e) {
     setFilter((prev) => (prev = { ...prev, state: true, value: "Today" }));
+    setView((prev) => (prev = "Tasks"));
   }
 
-  function thisWeek() {
+  function thisWeek(e) {
     setFilter((prev) => (prev = { ...prev, state: true, value: "This Week" }));
+    setView((prev) => (prev = "Tasks"));
   }
 
-  function thisMonth() {
+  function thisMonth(e) {
     setFilter((prev) => (prev = { ...prev, state: true, value: "This Month" }));
+    setView((prev) => (prev = "Tasks"));
   }
 
   return (
@@ -231,6 +234,7 @@ function App() {
         thisMonth={thisMonth}
         today={today}
         thisWeek={thisWeek}
+        filter={filter}
       />
       <Main
         view={view}
