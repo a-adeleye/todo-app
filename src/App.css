@@ -427,3 +427,27 @@ select {
   color: #93979b;
   font-size: 0.9em;
 }
+
+.success {
+  width: 200px;
+  height: 200px;
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2em;
+  transition: 0.2s;
+}
+
+.success i {
+  height: 100px;
+  width: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid green;
+  border-radius: 50%;
+  color: green;
+  font-size: 4em;
+  font-weight: bold;
+}

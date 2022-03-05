@@ -16,8 +16,11 @@ function ProjectForm(props) {
             placeholder="Project name"
           />
         </label>
-        <button type="button" onClick= {props.editingOn ? props.update : props.add}>
-         {props.editingOn ? 'Update Project' : 'Add Project'}
+        <button
+          type="button"
+          onClick={props.editingOn ? props.update : props.add}
+        >
+          {props.editingOn ? "Update Project" : "Add Project"}
         </button>
       </form>
     </div>
@@ -50,8 +53,11 @@ function NoteForm(props) {
             placeholder="Note content"
           ></textarea>
         </label>
-        <button type="button" onClick= {props.editingOn ? props.update : props.add}>
-          {props.editingOn ? 'Update Note' : 'Add Note'}
+        <button
+          type="button"
+          onClick={props.editingOn ? props.update : props.add}
+        >
+          {props.editingOn ? "Update Note" : "Add Note"}
         </button>
       </form>
     </div>
@@ -114,12 +120,25 @@ function TaskForm(props) {
             value={props.dueDate}
           ></input>
         </label>
-        <button type="button" onClick={props.editingOn ? props.update : props.add}>
-          {props.editingOn ? 'Update Task' : 'Add Task'}
+        <button
+          type="button"
+          onClick={props.editingOn ? props.update : props.add}
+        >
+          {props.editingOn ? "Update Task" : "Add Task"}
         </button>
       </form>
     </div>
   );
 }
 
-export { ProjectForm, NoteForm, TaskForm };
+function Success() {
+  return (
+    <div className="form-container">
+      <div className="success">
+        <i className="fa-solid fa-check"></i>
+      </div>
+    </div>
+  );
+}
+
+export { ProjectForm, NoteForm, TaskForm, Success };

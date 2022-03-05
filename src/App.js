@@ -4,7 +4,7 @@ import Navigation from "./components/Navigation";
 import { nanoid } from "nanoid";
 import Main from "./components/Main";
 import RightBar from "./components/RightBar";
-import { ProjectForm, NoteForm, TaskForm } from "./components/Forms";
+import { ProjectForm, NoteForm, TaskForm, Success } from "./components/Forms";
 import { isToday, isThisWeek, isThisMonth } from "./dateFunction.js";
 
 function App() {
@@ -48,7 +48,11 @@ function App() {
 
   function addProject() {
     setProjects((prev) => [...prev, projectData]);
+    hideForm();
+    displaySuccess();
+    setView((prev) => (prev = "Projects"));
     resetProjectData();
+    setFilter((prev) => (prev = { ...prev, state: false, value: "Projects" }));
   }
 
   function resetProjectData() {
@@ -67,6 +71,8 @@ function App() {
         project.id === projectData.id ? projectData : project
       )
     );
+    hideForm();
+    displaySuccess();
     toggleEditing();
     resetProjectData();
   }
@@ -95,6 +101,10 @@ function App() {
 
   function addNote() {
     setNotes((prev) => [...prev, noteData]);
+    hideForm();
+    displaySuccess();
+    setView((prev) => (prev = "Notes"));
+    setFilter((prev) => (prev = { ...prev, state: false, value: "Notes" }));
     resetNoteData();
   }
 
@@ -119,6 +129,8 @@ function App() {
     setNotes((prev) =>
       prev.map((note) => (note.id === noteData.id ? noteData : note))
     );
+    hideForm();
+    displaySuccess();
     toggleEditing();
     resetNoteData();
   }
@@ -141,6 +153,10 @@ function App() {
 
   function addTask() {
     setTasks((prev) => [...prev, taskData]);
+    hideForm();
+    displaySuccess();
+    setView((prev) => (prev = "Tasks"));
+    setFilter((prev) => (prev = { ...prev, state: false, value: "Tasks" }));
     resetTaskData();
   }
 
@@ -178,6 +194,8 @@ function App() {
     setTasks((prev) =>
       prev.map((task) => (task.id === taskData.id ? taskData : task))
     );
+    hideForm();
+    displaySuccess();
     toggleEditing();
     resetTaskData();
   }
@@ -225,6 +243,15 @@ function App() {
   function thisMonth(e) {
     setFilter((prev) => (prev = { ...prev, state: true, value: "This Month" }));
     setView((prev) => (prev = "Tasks"));
+  }
+
+  const [success, setSuccess] = React.useState(false);
+
+  function displaySuccess() {
+    setSuccess((prev) => (prev = true));
+    setTimeout(() => {
+      setSuccess((prev) => (prev = false));
+    }, 1000);
   }
 
   return (
@@ -288,6 +315,7 @@ function App() {
           editingOn={editingOn}
         />
       )}
+      {success && <Success />}
     </div>
   );
 }
