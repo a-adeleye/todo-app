@@ -1,26 +1,39 @@
 import { CompletedChart, InProgressChart } from "./Chart";
 
 function TaskStats(props) {
+  const { tasks } = props;
+
+  const taskCount = tasks.length;
+  const inProgressTaskCount = tasks.filter((task) => !task.completed).length;
+  const completedTaskCount = tasks.filter((task) => task.completed).length;
+  const completedPercentage =
+  completedTaskCount < 1 ? "" : Math.round((completedTaskCount / taskCount) * 100);
+  const inProgressPercentage = taskCount < 1 ? "" : 100 - completedPercentage;
+
   return (
     <div className="stats">
       <div className="stat">
         <i className="fa-solid fa-check-double"></i>
         <div className="stat--details">
-          <h4>12 Tasks</h4>
-          <p>Completed</p>
+          <h4>
+            {inProgressTaskCount} {inProgressTaskCount > 1 ? "Tasks" : "Task"}
+          </h4>
+          <p>In Progress</p>
         </div>
         <div className="stat--chart">
-          <CompletedChart percentage="100" />
+          <InProgressChart percentage={inProgressPercentage} />
         </div>
       </div>
       <div className="stat">
         <i className="fa-solid fa-boxes-stacked"></i>
         <div className="stat--details">
-          <h4>4 Tasks</h4>
-          <p>In Progress</p>
+          <h4>
+            {completedTaskCount} {completedTaskCount > 1 ? "Tasks" : "Task"}
+          </h4>
+          <p>Completed</p>
         </div>
         <div className="stat--chart">
-          <InProgressChart percentage="50" />
+          <CompletedChart percentage={completedPercentage} />
         </div>
       </div>
     </div>
@@ -58,9 +71,9 @@ function ProjectStats(props) {
   return (
     <div className="stats">
       <div className="stat one-column">
-        <i id="notes" className="fa-solid fa-clipboard"></i>
+        <i id="notes" className="fa-solid fa-bars-progress"></i>
         <div className="stat--details">
-          {projectCount === 1 ? (
+          {!projectCount ? (
             <h4>You only have the default project</h4>
           ) : (
             <h4>

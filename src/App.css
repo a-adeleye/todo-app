@@ -62,7 +62,7 @@ body {
   margin-right: 1em;
 }
 
-.fa-chart-pie {
+.fa-boxes-stacked {
   color: #fdc049;
 }
 
@@ -79,6 +79,7 @@ li:first-child {
   text-align: center;
   color: #dd5c5e;
   font-size: 1.2em;
+  cursor: pointer;
 }
 
 main {
@@ -200,6 +201,7 @@ button:active {
   gap: 1em;
   border-bottom: 1px solid #75797c;
   padding-bottom: 0.5em;
+  position: relative;
 }
 
 .task-details {
@@ -387,4 +389,17 @@ select {
 
 .two-column-form button {
   grid-column: 1 / span 2;
+}
+
+.more-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2em;
+  width: 200px;
+  color: #ffffff;
+}
+
+.more-details span {
+  color: #93979b;
+  font-size: 0.9em;
 }

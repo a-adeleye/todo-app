@@ -4,28 +4,29 @@ import Projects from "./Projects";
 import { TaskStats, NoteStats, ProjectStats } from "./Stats";
 
 function Main(props) {
+  const { view, tasks, notes, projects, formHandler } = props;
   return (
     <main>
       <header>
-        <h2>Dashboard</h2>
+        <h2>{view}</h2>
         <div className="buttons">
-          <button id="taskForm" onClick={props.formHandler}>
+          <button id="taskForm" onClick={formHandler}>
             <i className="fa-solid fa-plus"></i> New Task
           </button>
-          <button id="projectForm" onClick={props.formHandler}>
+          <button id="projectForm" onClick={formHandler}>
             <i className="fa-solid fa-plus"></i> New Project
           </button>
-          <button id="noteForm" onClick={props.formHandler}>
+          <button id="noteForm" onClick={formHandler}>
             <i className="fa-solid fa-plus"></i> New Note
           </button>
         </div>
       </header>
-      {props.view === "tasks" && <TaskStats notes={props.notes} />}
-      {props.view === "notes" && <NoteStats notes={props.notes} />}
-      {props.view === "projects" && <ProjectStats projects={props.projects} />}
-      {props.view === "tasks" && <Tasks></Tasks>}
-      {props.view === "notes" && <Notes notes={props.notes} />}
-      {props.view === "projects" && <Projects projects={props.projects} />}
+      {view === "Tasks" && <TaskStats tasks={tasks} /> }
+      {view === "Notes" && <NoteStats notes={notes} />}
+      {view === "Projects" && <ProjectStats projects={projects} />}
+      {view === "Tasks" && <Tasks tasks={tasks} />}
+      {view === "Notes" && <Notes notes={notes} />}
+      {view === "Projects" && <Projects projects={projects} />}
     </main>
   );
 }

@@ -9,7 +9,7 @@ import { ProjectForm, NoteForm, TaskForm } from "./components/Forms";
 function App() {
   //View
 
-  const [view, setView] = React.useState("tasks");
+  const [view, setView] = React.useState("Tasks");
 
   function selectView(e) {
     const { id } = e.target;
@@ -28,7 +28,7 @@ function App() {
   }
 
   // Projects
-  const [projects, setProjects] = React.useState([{ id: 1, name: "General" }]);
+  const [projects, setProjects] = React.useState([]);
 
   const [projectText, setProjectText] = React.useState("");
   function handleProjectChange(e) {
@@ -75,8 +75,9 @@ function App() {
     id: nanoid(),
     title: "",
     task: "",
-    project: "",
+    project: "General",
     dueDate: "",
+    completed: false,
   });
 
   function handleTaskChange(e) {
@@ -106,6 +107,7 @@ function App() {
         formHandler={showForm}
         projects={projects}
         notes={notes}
+        tasks={tasks}
       />
       <RightBar />
       {form === "projectForm" && (

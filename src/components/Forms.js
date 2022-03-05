@@ -99,7 +99,8 @@ function TaskForm(props) {
             onChange={props.onChange}
             value={props.project}
           >
-            <option value="Default">...select...</option>
+            <option value="General">...select...</option>
+            <option value="General">General</option>
             {projectList}
           </select>
         </label>

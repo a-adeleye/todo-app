@@ -1,28 +1,46 @@
-function Task() {
+import { nanoid } from "nanoid";
+
+function Task(props) {
+  const { id, title, task, completed, project, dueDate } = props;
+
   return (
     <div className="task">
       <i className="fa-solid fa-boxes-stacked"></i>
       <div className="task-details">
-        <p>Meizu Mobile App Redesign</p>
-        <p>Product Design</p>
+        <p id={id}>{title}</p>
+        <p>{task}</p>
+      </div>
+      <div className="more-details">
+        <p>Project: <span>{project}</span> </p>
+        <p>Due Date: <span>{dueDate}</span></p>
       </div>
       <div className="task-actions">
-        <input type="checkbox" name="" id="" />
-        <i className="fa-solid fa-pen-to-square"></i>
-        <i className="fa-solid fa-trash"></i>
+        <input type="checkbox" id={id} />
+        <i className="fa-solid fa-pen-to-square" id={id}></i>
+        <i className="fa-solid fa-trash" id={id}></i>
       </div>
     </div>
   );
 }
 
-function Tasks() {
+function Tasks(props) {
+  const { tasks } = props;
+
+  const taskList = tasks.map((task) => (
+    <Task
+      key={nanoid()}
+      title={task.title}
+      task={task.task}
+      id={task.id}
+      project={task.project}
+      dueDate={task.dueDate}
+    />
+  ));
+
   return (
     <section className="tasks">
       <h4>Tasks</h4>
-      <Task />
-      <Task />
-      <Task />
-      <Task />
+      {taskList}
     </section>
   );
 }

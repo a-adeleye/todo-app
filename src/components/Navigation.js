@@ -6,9 +6,9 @@ function Navigation(props) {
         <p>Hi User</p>
       </div>
       <ul className="nav-items">
-        <li onClick={props.handleClick} id="tasks">
-          <i id="tasks" className="fa-solid fa-chart-pie"></i>
-          <span id="tasks">Dashboard</span>
+        <li onClick={props.handleClick} id="Tasks">
+          <i id="Tasks" className="fa-solid fa-boxes-stacked"></i>
+          <span id="Tasks">Tasks</span>
         </li>
         <li>
           <i className="fa-solid fa-calendar-day"></i>
@@ -22,13 +22,13 @@ function Navigation(props) {
           <i className="fa-solid fa-calendar-days"></i>
           <span>This Month</span>
         </li>
-        <li onClick={props.handleClick} id="projects">
-          <i id="projects" className="fa-solid fa-bars-progress"></i>
-          <span id="projects">Projects</span>
+        <li onClick={props.handleClick} id="Projects">
+          <i id="Projects" className="fa-solid fa-bars-progress"></i>
+          <span id="Projects">Projects</span>
         </li>
-        <li onClick={props.handleClick} id="notes">
-          <i id="notes" className="fa-solid fa-clipboard"></i>
-          <span id="notes">Notes</span>
+        <li onClick={props.handleClick} id="Notes">
+          <i id="Notes" className="fa-solid fa-clipboard"></i>
+          <span id="Notes">Notes</span>
         </li>
       </ul>
       <div className="nav-toggle">
