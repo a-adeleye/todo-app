@@ -4,7 +4,20 @@ import Projects from "./Projects";
 import { TaskStats, NoteStats, ProjectStats } from "./Stats";
 
 function Main(props) {
-  const { view, tasks, notes, projects, formHandler, deleteTask, editTask, completeTask, editNote, deleteNote, deleteProject } = props;
+  const {
+    view,
+    tasks,
+    notes,
+    projects,
+    formHandler,
+    deleteTask,
+    editTask,
+    completeTask,
+    editNote,
+    deleteNote,
+    deleteProject,
+    editProject,
+  } = props;
   return (
     <main>
       <header>
@@ -21,12 +34,27 @@ function Main(props) {
           </button>
         </div>
       </header>
-      {view === "Tasks" && <TaskStats tasks={tasks} /> }
+      {view === "Tasks" && <TaskStats tasks={tasks} />}
       {view === "Notes" && <NoteStats notes={notes} />}
       {view === "Projects" && <ProjectStats projects={projects} />}
-      {view === "Tasks" && <Tasks tasks={tasks} deleteTask={deleteTask} editTask={editTask} completeTask={completeTask}/>}
-      {view === "Notes" && <Notes notes={notes} deleteNote={deleteNote} editNote={editNote}/>}
-      {view === "Projects" && <Projects projects={projects} deleteProject={deleteProject}/>}
+      {view === "Tasks" && (
+        <Tasks
+          tasks={tasks}
+          deleteTask={deleteTask}
+          editTask={editTask}
+          completeTask={completeTask}
+        />
+      )}
+      {view === "Notes" && (
+        <Notes notes={notes} deleteNote={deleteNote} editNote={editNote} />
+      )}
+      {view === "Projects" && (
+        <Projects
+          projects={projects}
+          deleteProject={deleteProject}
+          editProject={editProject}
+        />
+      )}
     </main>
   );
 }

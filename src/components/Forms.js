@@ -16,8 +16,8 @@ function ProjectForm(props) {
             placeholder="Project name"
           />
         </label>
-        <button type="button" onClick={props.onClick}>
-          Add project
+        <button type="button" onClick= {props.editingOn ? props.update : props.add}>
+         {props.editingOn ? 'Update Project' : 'Add Project'}
         </button>
       </form>
     </div>

@@ -36,27 +36,45 @@ function App() {
   // Projects
   const [projects, setProjects] = React.useState([]);
 
-  const [projectText, setProjectText] = React.useState("");
+  const [projectData, setProjectData] = React.useState({
+    id: nanoid(),
+    name: "",
+  });
   function handleProjectChange(e) {
-    setProjectText((prev) => (prev = e.target.value));
+    setProjectData((prev) => (prev = { ...prev, name: e.target.value }));
   }
 
   function addProject() {
-    setProjects((prev) => [...prev, { id: nanoid(), name: projectText }]);
-    resetProject();
+    setProjects((prev) => [...prev, projectData]);
+    resetProjectData();
   }
 
-  function resetProject() {
-    setProjectText((prev) => (prev = ""));
+  function resetProjectData() {
+    setProjectData((prev) => (prev = { id: nanoid(), name: "" }));
   }
 
   function deleteProject(e) {
-    setProjects((prev) => (prev = prev.filter((project) => project.id !== e.target.id)));
+    setProjects(
+      (prev) => (prev = prev.filter((project) => project.id !== e.target.id))
+    );
   }
 
-  function updateProject() {}
+  function updateProject() {
+    setProjects((prev) =>
+      prev.map((project) => (project.id === projectData.id ? projectData : project))
+    );
+    toggleEditing();
+    resetProjectData();
+  }
 
-  function editProject() {}
+  function editProject(e, param) {
+    toggleEditing();
+    showForm(param);
+    const currentProject = projects.filter(
+      (project) => project.id === e.target.id
+    );
+    setProjectData((prev) => (prev = { ...prev, ...currentProject[0] }));
+  }
 
   // Notes
   const [notes, setNotes] = React.useState([]);
@@ -185,13 +203,14 @@ function App() {
         editNote={editNote}
         deleteNote={deleteNote}
         deleteProject={deleteProject}
+        editProject={editProject}
       />
       <RightBar />
       {form === "projectForm" && (
         <ProjectForm
           onChange={handleProjectChange}
-          onClick={addProject}
-          value={projectText}
+          add={addProject}
+          value={projectData.name}
           hide={hideForm}
           editingOn={editingOn}
           update={updateProject}
