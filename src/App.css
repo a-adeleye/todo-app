@@ -333,24 +333,29 @@ form {
   display: flex;
 }
 
-.project-form {
+.one-column-form {
   flex-direction: column;
-  height: 170px;
   width: 300px;
   gap: 1em;
   border-radius: 4px;
-  padding: 1em;
+  padding: 2em;
   background-color: #ffffff;
 }
 
-.project-form i {
+.one-column-form i {
   text-align: center;
   cursor: pointer;
 }
 
-.project-form input {
+input[type="text"],
+textarea {
   padding: 0.5em 1em;
   display: block;
   margin-top: 0.2em;
   width: 100%;
+}
+
+textarea {
+  height: 100px;
+  font-family: inherit;
 }

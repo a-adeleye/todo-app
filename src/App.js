@@ -4,18 +4,22 @@ import Navigation from "./components/Navigation";
 import { nanoid } from "nanoid";
 import Main from "./components/Main";
 import RightBar from "./components/RightBar";
-import { ProjectForm } from "./Forms";
+import { ProjectForm, NoteForm } from "./Forms";
 
 function App() {
+
+  //View
+
   const [view, setView] = React.useState("tasks");
-  const [projects, setProjects] = React.useState([{id: 1, name: "General"}]);
-  const [form, setForm] = React.useState("");
-
-  const [projectText, setProjectText] = React.useState("");
-
-  function handleProjectChange(e) {
-    setProjectText((prev) => (prev = e.target.value));
+  
+  function selectView(e) {
+    const { id } = e.target;
+    setView((prev) => (prev = id));
+    console.log(id);
   }
+
+  // Form display
+  const [form, setForm] = React.useState("");
 
   function showForm(e) {
     setForm((prev) => (prev = e.target.id));
@@ -26,8 +30,16 @@ function App() {
     setForm((prev) => (prev = ""));
   }
 
+  // Projects
+  const [projects, setProjects] = React.useState([{ id: 1, name: "General" }]);
+
+  const [projectText, setProjectText] = React.useState("");
+  function handleProjectChange(e) {
+    setProjectText((prev) => (prev = e.target.value));
+  }
+
   function addProject() {
-    setProjects((prev) => [...prev, {id: nanoid(), name: projectText}]);
+    setProjects((prev) => [...prev, { id: nanoid(), name: projectText }]);
     resetProject();
   }
 
@@ -35,16 +47,32 @@ function App() {
     setProjectText((prev) => (prev = ""));
   }
 
-  function selectView(e) {
-    const { id } = e.target;
-    setView((prev) => (prev = id));
-    console.log(id);
+  // Notes
+  const [notes, setNotes] = React.useState([]);
+  const [noteData, setNoteData] = React.useState({
+    id: nanoid(),
+    title: "",
+    noteText: "",
+  });
+
+  function handleNoteChange(e) {
+    const {name, value} = e.target;
+    setNoteData((prev) => (prev = {...noteData,[name]: value}));
+  }
+
+  function addNote() {
+    setNotes((prev) => [...prev, noteData]);
+    resetNote();
+  }
+
+  function resetNote() {
+    setNoteData((prev) => (prev = {...prev, id: nanoid(), title: "", noteText: ""}));
   }
 
   return (
     <div className="App">
       <Navigation handleClick={selectView} />
-      <Main view={view} formHandler={showForm} projects={projects}/>
+      <Main view={view} formHandler={showForm} projects={projects} notes={notes}/>
       <RightBar />
       {form === "projectForm" && (
         <ProjectForm
@@ -53,6 +81,17 @@ function App() {
           value={projectText}
           hide={hideForm}
         />
+        
+      )}
+      {form === "noteForm" && (
+        <NoteForm
+          onChange={handleNoteChange}
+          onClick={addNote}
+          title={noteData.title}
+          body={noteData.noteText}
+          hide={hideForm}
+        />
+        
       )}
     </div>
   );

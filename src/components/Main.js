@@ -44,7 +44,7 @@ function Main(props) {
         </div>
       </div>
      {props.view === 'tasks' && <Tasks></Tasks>}
-      {props.view === 'notes' && <Notes></Notes>}
+      {props.view === 'notes' && <Notes notes={props.notes}/>}
       {props.view === 'projects' && <Projects projects={props.projects}/>}
     </main>
   );
