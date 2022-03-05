@@ -90,14 +90,25 @@ function App() {
     resetTask();
   }
 
+  function deleteTask(e) {
+    setTasks((prev) => (prev = prev.filter((task) => task.id !== e.target.id)));
+  }
+
   function resetTask() {
     setTaskData(
-      (prev) => (prev = { ...prev, id: nanoid(), title: "", task: "",project: "",
-      dueDate: "", })
+      (prev) =>
+        (prev = {
+          ...prev,
+          id: nanoid(),
+          title: "",
+          task: "",
+          project: "",
+          dueDate: "",
+        })
     );
   }
 
-  console.log(tasks)
+  console.log(tasks);
 
   return (
     <div className="App">
@@ -108,6 +119,7 @@ function App() {
         projects={projects}
         notes={notes}
         tasks={tasks}
+        deleteTask={deleteTask}
       />
       <RightBar />
       {form === "projectForm" && (
