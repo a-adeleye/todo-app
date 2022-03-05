@@ -1,7 +1,7 @@
 import { nanoid } from "nanoid";
 
 function Task(props) {
-  const { id, title, task, completeTask, project, dueDate, deleteTask, editTask, completed } = props;
+  const { id, title, task, completeTask, project, dueDate, deleteTask, editTask, completed, } = props;
 
   return (
     <div className="task">
@@ -24,9 +24,11 @@ function Task(props) {
 }
 
 function Tasks(props) {
-  const { tasks, deleteTask, editTask, completeTask } = props;
+  const { tasks, deleteTask, editTask, completeTask, filter, filteredTasks } = props;
 
-  const taskList = tasks.map((task) => (
+  const taskArray = filter.state ? filteredTasks : tasks;
+
+  const taskList = taskArray.map((task) => (
     <Task
       key={nanoid()}
       title={task.title}
@@ -38,12 +40,13 @@ function Tasks(props) {
       deleteTask={deleteTask}
       editTask={editTask}
       completeTask={completeTask}
+      filter = {filter}
     />
   ));
 
   return (
     <section className="tasks">
-      <h4>Tasks</h4>
+      <h4>{filter.value}</h4>
       {taskList}
     </section>
   );

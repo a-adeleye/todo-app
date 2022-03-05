@@ -5,6 +5,7 @@ import { nanoid } from "nanoid";
 import Main from "./components/Main";
 import RightBar from "./components/RightBar";
 import { ProjectForm, NoteForm, TaskForm } from "./components/Forms";
+import { isToday, isThisWeek, isThisMonth } from "./dateFunction.js";
 
 function App() {
   //View
@@ -15,6 +16,7 @@ function App() {
   function selectView(e) {
     const { id } = e.target;
     setView((prev) => (prev = id));
+    setFilter(prev => prev = {...prev, state: false, value: "Tasks"});
   }
 
   // Form display
@@ -180,7 +182,6 @@ function App() {
 
   function completeTask(e) {
     const { id, checked } = e.target;
-    console.log(checked);
     setTasks((prev) =>
       prev.map((task) =>
         task.id === id ? { ...task, completed: checked } : task
@@ -188,9 +189,30 @@ function App() {
     );
   }
 
+  const [filter, setFilter] = React.useState({state: false, value: "Tasks"});
+  const [filteredTasks, setFilteredTasks] = React.useState([tasks]);
+
+  function today(){
+    setFilter(prev => prev = {...prev, state: true, value: "Today"})
+    setFilteredTasks(prev => prev = tasks.filter(task => isToday(task.dueDate)));
+  }
+
+  function thisWeek(){
+    setFilter(prev => prev = {...prev, state: true, value: "This Week"})
+    setFilteredTasks(prev => prev = tasks.filter(task => isThisWeek(task.dueDate)));
+  }
+
+  function thisMonth(){
+    setFilter(prev => prev = {...prev, state: true, value: "This Month"})
+    setFilteredTasks(prev => prev = tasks.filter(task => isThisMonth(task.dueDate)));
+  }
+
+  console.log(filteredTasks);
+
+console.log(tasks)
   return (
     <div className="App">
-      <Navigation handleClick={selectView} />
+      <Navigation handleClick={selectView} thisMonth={thisMonth} today={today} thisWeek={thisWeek}/>
       <Main
         view={view}
         formHandler={showForm}
@@ -204,6 +226,8 @@ function App() {
         deleteNote={deleteNote}
         deleteProject={deleteProject}
         editProject={editProject}
+        filter={filter}
+        filteredTasks ={filteredTasks}
       />
       <RightBar />
       {form === "projectForm" && (

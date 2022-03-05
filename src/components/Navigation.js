@@ -10,17 +10,17 @@ function Navigation(props) {
           <i id="Tasks" className="fa-solid fa-boxes-stacked"></i>
           <span id="Tasks">Tasks</span>
         </li>
-        <li>
-          <i className="fa-solid fa-calendar-day"></i>
-          <span>Today</span>
+        <li id="today" onClick={props.today}>
+          <i className="fa-solid fa-calendar-day" id="today"></i>
+          <span id="today">Today</span>
         </li>
-        <li>
-          <i className="fa-solid fa-calendar-week"></i>
-          <span>This Week</span>
+        <li id="thisWeek" onClick={props.thisWeek}>
+          <i className="fa-solid fa-calendar-week" id="thisWeek"></i>
+          <span id="thisWeek">This Week</span>
         </li>
-        <li>
-          <i className="fa-solid fa-calendar-days"></i>
-          <span>This Month</span>
+        <li id="thisMonth" onClick={props.thisMonth}>
+          <i className="fa-solid fa-calendar-days" id="thisMonth"></i>
+          <span id="thisMonth">This Month</span>
         </li>
         <li onClick={props.handleClick} id="Projects">
           <i id="Projects" className="fa-solid fa-bars-progress"></i>

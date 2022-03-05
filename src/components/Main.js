@@ -17,6 +17,8 @@ function Main(props) {
     deleteNote,
     deleteProject,
     editProject,
+    filter,
+    filteredTasks
   } = props;
   return (
     <main>
@@ -43,6 +45,8 @@ function Main(props) {
           deleteTask={deleteTask}
           editTask={editTask}
           completeTask={completeTask}
+          filter={filter}
+          filteredTasks={filteredTasks}
         />
       )}
       {view === "Notes" && (
