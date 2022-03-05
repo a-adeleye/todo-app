@@ -18,7 +18,7 @@ function Main(props) {
     deleteProject,
     editProject,
     filter,
-    filteredTasks
+    filteredTasks,
   } = props;
   return (
     <main>
@@ -36,7 +36,13 @@ function Main(props) {
           </button>
         </div>
       </header>
-      {view === "Tasks" && <TaskStats tasks={tasks} />}
+      {view === "Tasks" && (
+        <TaskStats
+          tasks={tasks}
+          filter={filter}
+          filteredTasks={filteredTasks}
+        />
+      )}
       {view === "Notes" && <NoteStats notes={notes} />}
       {view === "Projects" && <ProjectStats projects={projects} />}
       {view === "Tasks" && (

@@ -1,11 +1,13 @@
 import { CompletedChart, InProgressChart } from "./Chart";
 
 function TaskStats(props) {
-  const { tasks } = props;
+  const { tasks, filter, filteredTasks } = props;
 
-  const taskCount = tasks.length;
-  const inProgressTaskCount = tasks.filter((task) => !task.completed).length;
-  const completedTaskCount = tasks.filter((task) => task.completed).length;
+  const taskArray = filter.state ? filteredTasks : tasks;
+
+  const taskCount = taskArray.length;
+  const inProgressTaskCount = taskArray.filter((task) => !task.completed).length;
+  const completedTaskCount = taskArray.filter((task) => task.completed).length;
   const completedPercentage =
   completedTaskCount < 1 ? "" : Math.round((completedTaskCount / taskCount) * 100);
   const inProgressPercentage = taskCount < 1 ? "" : 100 - completedPercentage;

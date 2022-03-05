@@ -46,7 +46,7 @@ function Tasks(props) {
 
   return (
     <section className="tasks">
-      <h4>{filter.value}</h4>
+      {<h4>{taskArray.length < 1 ? "You currently have no tasks" : filter.value}</h4>}
       {taskList}
     </section>
   );
