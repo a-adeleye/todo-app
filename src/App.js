@@ -25,9 +25,9 @@ function App() {
   }
 
   function hideForm() {
-    setForm(prev => prev = "");
-    if(editingOn){
-      toggleEditing()
+    setForm((prev) => (prev = ""));
+    if (editingOn) {
+      toggleEditing();
       resetTaskData();
       resetNoteData();
     }
@@ -49,6 +49,14 @@ function App() {
   function resetProject() {
     setProjectText((prev) => (prev = ""));
   }
+
+  function deleteProject(e) {
+    setProjects((prev) => (prev = prev.filter((project) => project.id !== e.target.id)));
+  }
+
+  function updateProject() {}
+
+  function editProject() {}
 
   // Notes
   const [notes, setNotes] = React.useState([]);
@@ -74,19 +82,21 @@ function App() {
     );
   }
 
-  function deleteNote(e){
+  function deleteNote(e) {
     setNotes((prev) => (prev = prev.filter((note) => note.id !== e.target.id)));
   }
 
-  function editNote(e, param){
+  function editNote(e, param) {
     toggleEditing();
     showForm(param);
-    const currentNote = notes.filter(note => note.id === e.target.id);
-    setNoteData(prev => prev = {...prev, ...currentNote[0]})
+    const currentNote = notes.filter((note) => note.id === e.target.id);
+    setNoteData((prev) => (prev = { ...prev, ...currentNote[0] }));
   }
 
   function updateNote() {
-    setNotes(prev => prev.map(note => note.id === noteData.id ? noteData : note));
+    setNotes((prev) =>
+      prev.map((note) => (note.id === noteData.id ? noteData : note))
+    );
     toggleEditing();
     resetNoteData();
   }
@@ -131,30 +141,34 @@ function App() {
     );
   }
 
-  function toggleEditing(){
-    setEditingOn(prev => prev =! prev)
+  function toggleEditing() {
+    setEditingOn((prev) => (prev = !prev));
   }
 
-  function editTask(e, param){
+  function editTask(e, param) {
     toggleEditing();
     showForm(param);
-    const currentTask = tasks.filter(task => task.id === e.target.id);
-    setTaskData(prev => prev = {...prev, ...currentTask[0]})
+    const currentTask = tasks.filter((task) => task.id === e.target.id);
+    setTaskData((prev) => (prev = { ...prev, ...currentTask[0] }));
   }
 
-  function updateTask(){
-    setTasks(prev => prev.map(task => task.id === taskData.id ? taskData : task));
+  function updateTask() {
+    setTasks((prev) =>
+      prev.map((task) => (task.id === taskData.id ? taskData : task))
+    );
     toggleEditing();
     resetTaskData();
   }
 
-  function completeTask(e){
-    const {id, checked} = e.target;
-    console.log(checked)
-    setTasks(prev => prev.map(task => task.id === id ? {...task, completed: checked} : task))
+  function completeTask(e) {
+    const { id, checked } = e.target;
+    console.log(checked);
+    setTasks((prev) =>
+      prev.map((task) =>
+        task.id === id ? { ...task, completed: checked } : task
+      )
+    );
   }
-
-  console.table(notes)
 
   return (
     <div className="App">
@@ -166,10 +180,11 @@ function App() {
         notes={notes}
         tasks={tasks}
         deleteTask={deleteTask}
-        editTask ={editTask}
+        editTask={editTask}
         completeTask={completeTask}
         editNote={editNote}
         deleteNote={deleteNote}
+        deleteProject={deleteProject}
       />
       <RightBar />
       {form === "projectForm" && (
@@ -178,7 +193,8 @@ function App() {
           onClick={addProject}
           value={projectText}
           hide={hideForm}
-          editingOn ={editingOn}
+          editingOn={editingOn}
+          update={updateProject}
         />
       )}
       {form === "noteForm" && (
@@ -188,7 +204,7 @@ function App() {
           title={noteData.title}
           body={noteData.noteText}
           hide={hideForm}
-          editingOn ={editingOn}
+          editingOn={editingOn}
           update={updateNote}
         />
       )}
@@ -203,7 +219,7 @@ function App() {
           task={taskData.task}
           project={taskData.project}
           dueDate={taskData.dueDate}
-          editingOn ={editingOn}
+          editingOn={editingOn}
         />
       )}
     </div>

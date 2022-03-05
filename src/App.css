@@ -262,10 +262,27 @@ button:active {
 }
 
 .project {
+  width: 100%;
+  display: flex;
   padding: 0.5em 2em;
   background-color: #222c41;
   border-radius: 8px;
   color: #75797c;
+  align-items: center;
+}
+
+.project p {
+  color: #ffffff;
+  margin-right: auto;
+}
+
+.project-actions {
+  display: flex;
+  gap: 1em;
+}
+
+.project-actions i {
+  cursor: pointer;
 }
 
 .note > h5 {

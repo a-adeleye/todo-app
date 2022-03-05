@@ -4,7 +4,7 @@ import Projects from "./Projects";
 import { TaskStats, NoteStats, ProjectStats } from "./Stats";
 
 function Main(props) {
-  const { view, tasks, notes, projects, formHandler, deleteTask, editTask, completeTask, editNote, deleteNote } = props;
+  const { view, tasks, notes, projects, formHandler, deleteTask, editTask, completeTask, editNote, deleteNote, deleteProject } = props;
   return (
     <main>
       <header>
@@ -26,7 +26,7 @@ function Main(props) {
       {view === "Projects" && <ProjectStats projects={projects} />}
       {view === "Tasks" && <Tasks tasks={tasks} deleteTask={deleteTask} editTask={editTask} completeTask={completeTask}/>}
       {view === "Notes" && <Notes notes={notes} deleteNote={deleteNote} editNote={editNote}/>}
-      {view === "Projects" && <Projects projects={projects} />}
+      {view === "Projects" && <Projects projects={projects} deleteProject={deleteProject}/>}
     </main>
   );
 }
