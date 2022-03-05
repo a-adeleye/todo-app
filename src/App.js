@@ -16,7 +16,7 @@ function App() {
   function selectView(e) {
     const { id } = e.target;
     setView((prev) => (prev = id));
-    setFilter(prev => prev = {...prev, state: false, value: "Tasks"});
+    setFilter((prev) => (prev = { ...prev, state: false, value: "Tasks" }));
   }
 
   // Form display
@@ -63,7 +63,9 @@ function App() {
 
   function updateProject() {
     setProjects((prev) =>
-      prev.map((project) => (project.id === projectData.id ? projectData : project))
+      prev.map((project) =>
+        project.id === projectData.id ? projectData : project
+      )
     );
     toggleEditing();
     resetProjectData();
@@ -189,30 +191,47 @@ function App() {
     );
   }
 
-  const [filter, setFilter] = React.useState({state: false, value: "Tasks"});
+  const [filter, setFilter] = React.useState({ state: false, value: "Tasks" });
   const [filteredTasks, setFilteredTasks] = React.useState([tasks]);
 
-  function today(){
-    setFilter(prev => prev = {...prev, state: true, value: "Today"})
-    setFilteredTasks(prev => prev = tasks.filter(task => isToday(task.dueDate)));
+  React.useEffect(() => {
+    if (filter.value === "Today") {
+      setFilteredTasks(
+        (prev) => (prev = tasks.filter((task) => isToday(task.dueDate)))
+      );
+    } else if (filter.value === "This Week") {
+      setFilteredTasks(
+        (prev) => (prev = tasks.filter((task) => isThisWeek(task.dueDate)))
+      );
+    } else if (filter.value === "This Month") {
+      setFilteredTasks(
+        (prev) => (prev = tasks.filter((task) => isThisMonth(task.dueDate)))
+      );
+    } else {
+      setFilteredTasks((prev) => (prev = tasks));
+    }
+  }, [filter, tasks]);
+
+  function today() {
+    setFilter((prev) => (prev = { ...prev, state: true, value: "Today" }));
   }
 
-  function thisWeek(){
-    setFilter(prev => prev = {...prev, state: true, value: "This Week"})
-    setFilteredTasks(prev => prev = tasks.filter(task => isThisWeek(task.dueDate)));
+  function thisWeek() {
+    setFilter((prev) => (prev = { ...prev, state: true, value: "This Week" }));
   }
 
-  function thisMonth(){
-    setFilter(prev => prev = {...prev, state: true, value: "This Month"})
-    setFilteredTasks(prev => prev = tasks.filter(task => isThisMonth(task.dueDate)));
+  function thisMonth() {
+    setFilter((prev) => (prev = { ...prev, state: true, value: "This Month" }));
   }
 
-  console.log(filteredTasks);
-
-console.log(tasks)
   return (
     <div className="App">
-      <Navigation handleClick={selectView} thisMonth={thisMonth} today={today} thisWeek={thisWeek}/>
+      <Navigation
+        handleClick={selectView}
+        thisMonth={thisMonth}
+        today={today}
+        thisWeek={thisWeek}
+      />
       <Main
         view={view}
         formHandler={showForm}
@@ -227,7 +246,7 @@ console.log(tasks)
         deleteProject={deleteProject}
         editProject={editProject}
         filter={filter}
-        filteredTasks ={filteredTasks}
+        filteredTasks={filteredTasks}
       />
       <RightBar />
       {form === "projectForm" && (
