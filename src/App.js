@@ -74,8 +74,8 @@ function App() {
     );
   }
 
-  function deleteNote(){
-console.log("delete")
+  function deleteNote(e){
+    setNotes((prev) => (prev = prev.filter((note) => note.id !== e.target.id)));
   }
 
   function editNote(e, param){
