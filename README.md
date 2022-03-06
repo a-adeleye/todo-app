@@ -27,4 +27,4 @@ You may also see any lint errors in the console.
 
 <div align="center"><img src="./src/todo-app.png" alt="app screenshot" width="1000" /></div>
 
-[Live App here](https://a-adeleye.github.io/todo-app/).
+[Live App here](https://a-adeleye.github.io/todo-app/)
