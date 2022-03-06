@@ -95,7 +95,7 @@ function Navigation(props) {
           <i id="Notes" className="fa-solid fa-clipboard"></i>
           {!collapsed && <span id="Notes">Notes</span>}
         </div>
-        <button className="logout-button" onClick={handleLogout}>Logout</button>
+        {!collapsed && <button className="logout-button" onClick={handleLogout}>Logout</button>}
       </div>
       <div className="nav-toggle" onClick={toggle}>
         {!collapsed && <i className="fa-solid fa-angles-left"></i>}
