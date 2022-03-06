@@ -547,6 +547,23 @@ select {
   margin-top: auto;
 }
 
+.loading {
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  padding: 0;
+  position: absolute;
+  background-color: #222c41;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loading svg {
+  width: 100%;
+  height: 100%;
+}
+
 @media only screen and (max-width: 1093px) {
   .stat > i,
   .task > i {

@@ -17,6 +17,7 @@ import {
   sendPasswordResetEmail,
   signOut,
 } from "firebase/auth";
+import Loading from "./Loading";
 
 function Authentication({ title }) {
   const [email, setEmail] = React.useState("");
@@ -26,12 +27,14 @@ function Authentication({ title }) {
   const dispatch = useDispatch();
 
   function signinWithGoogle() {
+    
     const auth = getAuth();
     signInWithRedirect(auth, provider);
   }
 
   React.useEffect(() => {
     const auth = getAuth();
+    
     getRedirectResult(auth)
       .then((result) => {
         // This gives you a Google Access Token. You can use it to access Google APIs.
@@ -41,12 +44,16 @@ function Authentication({ title }) {
         // The signed-in user info.
         const user = result.user;
         dispatch(signin(user.displayName));
-        navigate("/todo");
+        
+        setTimeout(() => {
+          navigate("/todo");
+        },2000) 
+        console.log("555")
         sessionStorage.setItem(
             "Auth Token",
             token
           );
-        
+          console.log("666")
       })
       .catch((error) => {
         // Handle Errors here.
@@ -63,7 +70,21 @@ function Authentication({ title }) {
   },[]);
 
   const handleAction = (param) => {
+    if(email === "" && password === ""){
+      toast.error("Email and password fields can not be empty")
+      return;
+    }
+    if(email === ""){
+      toast.error("Email can not be empty")
+      return;
+    }
+    if(password === ""){
+      toast.error("Password can not be empty")
+      return;
+    }
+
     const authentication = getAuth();
+    setLoading();
 
     if (param === "Sign Up") {
       createUserWithEmailAndPassword(authentication, email, password)
@@ -75,10 +96,13 @@ function Authentication({ title }) {
           );
         })
         .catch((error) => {
+          console.log(error.message)
           if (error.code === "auth/invalid-email") {
+            setLoading();
             toast.error("Please check the Email");
           }
           if (error.code === "auth/email-already-in-use") {
+            setLoading();
             toast.error("User exist, please check the email");
           }
         });
@@ -96,21 +120,33 @@ function Authentication({ title }) {
         .catch((error) => {
           if (error.code === "auth/wrong-password") {
             toast.error("Please check the Password");
+            setLoading();
           }
           if (error.code === "auth/user-not-found") {
             toast.error("Please check the Email");
+            setLoading();
           }
         });
     }
   };
 
   const guestLogin = () => {
+    setLoading();
     sessionStorage.setItem(
       "Auth Token",
       "Guest Token"
     );
-    navigate("/todo");
+    setTimeout(() => {
+      navigate("/todo");
+    }, 1000)
+    
     dispatch(signin("Guest"));
+  }
+
+  const [isLoading, setIsLoading] = React.useState(false);
+
+  function setLoading(){
+    setIsLoading(prev => prev = !prev)
   }
 
   return (
@@ -170,6 +206,7 @@ function Authentication({ title }) {
         </div>
       </div>
       <ToastContainer />
+      {isLoading && <Loading />}
     </section>
   );
 }
