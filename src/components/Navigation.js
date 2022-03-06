@@ -1,7 +1,9 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function Navigation(props) {
-const {filter} = props;
+  const { filter } = props;
 
   React.useEffect(() => {
     function setActiveLink(e) {
@@ -13,7 +15,7 @@ const {filter} = props;
       }
     }
     setActiveLink();
-  },[filter]);
+  }, [filter]);
 
   const [collapsed, setCollapsed] = React.useState(false);
 
@@ -34,13 +36,36 @@ const {filter} = props;
     ? { justifyContent: "center" }
     : { transition: "0.2s" };
 
+  let navigate = useNavigate();
+
+  const handleLogout = () => {
+    sessionStorage.removeItem("Auth Token");
+    toast("Logout successfull ");
+    navigate("/login");
+  };
+
+  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+
+  React.useEffect(() => {
+    let authToken = sessionStorage.getItem("Auth Token");
+    if (authToken) {
+      setIsLoggedIn(prev => prev = true)
+    }
+
+    if (!authToken) {
+      setIsLoggedIn(prev => prev = false)
+    }
+  }, []);
+
+  console.log(isLoggedIn);
+
   return (
     <section className="navigation" style={navbarStyle}>
-      <div className="profile" style={profileStyle}>
-        <div className="box">U</div>
-        {!collapsed && <p>Hi User</p>}
-      </div>
       <div className="nav-items">
+        <div className="profile" style={profileStyle}>
+          <div className="box">U</div>
+          {!collapsed && <p>Hi User</p>}
+        </div>
         <div onClick={props.handleClick} id="Tasks" className="nav-item">
           <i id="Tasks" className="fa-solid fa-boxes-stacked"></i>
           {!collapsed && <span id="Tasks">Tasks</span>}
@@ -65,6 +90,7 @@ const {filter} = props;
           <i id="Notes" className="fa-solid fa-clipboard"></i>
           {!collapsed && <span id="Notes">Notes</span>}
         </div>
+        <button className="logout-button" onClick={handleLogout}>Logout</button>
       </div>
       <div className="nav-toggle" onClick={toggle}>
         {!collapsed && <i className="fa-solid fa-angles-left"></i>}
