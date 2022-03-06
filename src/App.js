@@ -2,16 +2,11 @@ import React from "react";
 import "./App.css";
 import Todo from "./components/Todo";
 import Authentication from "./components/Authentication";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
-
   return (
-    <Router basename="/">
+    <Router basename="todo-app/">
       <div className="App">
         <>
           <Routes>
