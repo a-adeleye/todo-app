@@ -6,6 +6,7 @@ import Main from "./components/Main";
 import RightBar from "./components/RightBar";
 import { ProjectForm, NoteForm, TaskForm, Success } from "./components/Forms";
 import { isToday, isThisWeek, isThisMonth } from "./dateFunction.js";
+import Authentication from "./components/Authentication";
 
 function App() {
   //View
@@ -334,6 +335,7 @@ function App() {
         />
       )}
       {success && <Success />}
+      <Authentication />
     </div>
   );
 }

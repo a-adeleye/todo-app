@@ -1,17 +1,17 @@
 export const isToday = (date) => {
   let today = new Date().getDate();
   let dueDate = new Date(date).getDate();
-  return today == dueDate;
+  return today === dueDate;
 };
 
 export const isThisMonth = (date) => {
   let thisMonth = new Date().getMonth();
   let dueDateMonth = new Date(date).getMonth();
-  return thisMonth == dueDateMonth;
+  return thisMonth === dueDateMonth;
 };
 
 export const isThisWeek = (date) => {
-  return currentWeek() == dateWeek(date);
+  return currentWeek() === dateWeek(date);
 };
 
 const currentWeek = () => {

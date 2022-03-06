@@ -11,7 +11,7 @@ function RightBar() {
       <div className="pro">
         <i className="fa-solid fa-crown"></i>
         <h4>Get More Features With Pro</h4>
-        <a href="#">Upgrade Plan</a>
+        <button>Upgrade Plan</button>
       </div>
     </section>
   );

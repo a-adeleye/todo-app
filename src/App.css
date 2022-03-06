@@ -323,17 +323,14 @@ button:active {
   justify-content: center;
 }
 
-.pro > a {
+.pro > button {
   padding: 0.7em 2em;
   background-color: #ffffff;
   color: #6a69df;
   border-radius: 8px;
   border: none;
   text-decoration: none;
-}
-
-.pro > a:active {
-  transform: scale(0.97);
+  font-size: 1em;
 }
 
 .pro > i {
@@ -381,6 +378,7 @@ form {
 }
 
 [type="text"],
+[type="password"],
 textarea,
 select,
 [type="date"] {
@@ -452,6 +450,83 @@ select {
   color: green;
   font-size: 4em;
   font-weight: bold;
+}
+
+.authentication {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1em;
+  height: 100vh;
+  width: 100%;
+  background-color: #222c41;
+  position: absolute;
+}
+
+.auth-links {
+  width: 300px;
+  text-align: left;
+  border-bottom: #6a69df 1px solid;
+}
+
+.auth-link {
+  border-radius: unset;
+  font-weight: bold;
+  background-color: unset;
+}
+
+.auth-container {
+  padding: 2em;
+  width: 350px;
+  background-color: #ffffff;
+}
+
+.auth-container form {
+  border-radius: unset;
+  padding: 1em 0;
+  width: 100%;
+}
+
+.auth-container input {
+  border: 1px solid #93979b;
+  outline: #75797c;
+}
+
+.auth-container button {
+  font-size: 1em;
+}
+
+.social-login {
+  color: #ffffff;
+  padding: 0.5em;
+  cursor: pointer;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1em;
+}
+
+.social-login,
+.login button,
+.auth-container input {
+  padding: 0.8em;
+  border-radius: 12px;
+}
+
+.social-login img {
+  width: 20px;
+}
+
+.google {
+  background-color: #ffffff;
+  color: #222c41;
+  border: 1px solid #75797c;
+}
+
+.facebook {
+  background-color: #4267b2;
 }
 
 @media only screen and (max-width: 1093px) {
