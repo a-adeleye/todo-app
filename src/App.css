@@ -535,8 +535,8 @@ select {
   border: 1px solid #75797c;
 }
 
-.facebook {
-  background-color: #4267b2;
+.guest {
+  background-color: #6a69df;
 }
 
 .logout-button {

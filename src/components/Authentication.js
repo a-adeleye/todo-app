@@ -104,6 +104,15 @@ function Authentication({ title }) {
     }
   };
 
+  const guestLogin = () => {
+    sessionStorage.setItem(
+      "Auth Token",
+      "Guest Token"
+    );
+    navigate("/todo");
+    dispatch(signin("Guest"));
+  }
+
   return (
     <section className="authentication">
       <div className="auth-container">
@@ -154,9 +163,8 @@ function Authentication({ title }) {
               <img src={google} alt="" />
               <p>{title} with Google</p>
             </div>
-            <div className="social-login facebook">
-              <i className="fa-brands fa-facebook-square"></i>
-              <p>{title} with Facebook</p>
+            <div className="social-login guest" onClick={guestLogin}>
+              <p>Login as guest</p>
             </div>
           </form>
         </div>
