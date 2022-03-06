@@ -3,8 +3,8 @@ import google from "../google.png";
 import { NavLink, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import {useSelector, useDispatch } from "react-redux";
-import { signin, username } from "../UserData";
+import { useDispatch } from "react-redux";
+import { signin } from "../UserData";
 
 import { app } from "../firebase-config";
 import {

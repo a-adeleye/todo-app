@@ -701,4 +701,8 @@ select {
     flex-basis: 100%;
     justify-content: center;
   }
+
+  .google {
+    display: none;
+  }
 }
