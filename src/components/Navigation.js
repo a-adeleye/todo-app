@@ -1,9 +1,14 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useSelector, useDispatch } from "react-redux";
+import { signout, username } from "../UserData";
 
 function Navigation(props) {
   const { filter } = props;
+  
+  const dispatch = useDispatch();
+  const userName = useSelector(username);
 
   React.useEffect(() => {
     function setActiveLink(e) {
@@ -42,11 +47,13 @@ function Navigation(props) {
     sessionStorage.removeItem("Auth Token");
     toast("Logout successfull ");
     navigate("/login");
+    dispatch(signout(""))
   };
 
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
 
   React.useEffect(() => {
+    
     let authToken = sessionStorage.getItem("Auth Token");
     if (authToken) {
       setIsLoggedIn(prev => prev = true)
@@ -57,14 +64,12 @@ function Navigation(props) {
     }
   }, []);
 
-  console.log(isLoggedIn);
-
   return (
     <section className="navigation" style={navbarStyle}>
       <div className="nav-items">
         <div className="profile" style={profileStyle}>
-          <div className="box">U</div>
-          {!collapsed && <p>Hi User</p>}
+          <div className="box">{userName ? userName.charAt(0) : "U"}</div>
+          {!collapsed && <p>Hi {userName || "User"}</p>}
         </div>
         <div onClick={props.handleClick} id="Tasks" className="nav-item">
           <i id="Tasks" className="fa-solid fa-boxes-stacked"></i>

@@ -1,14 +1,17 @@
 import React from "react";
 import google from "../google.png";
 import { NavLink, useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import {useSelector, useDispatch } from "react-redux";
+import { signin, username } from "../UserData";
 
 import { app } from "../firebase-config";
 import {
   GoogleAuthProvider,
   getAuth,
-  signInWithPopup,
+  signInWithRedirect,
+  getRedirectResult,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   sendPasswordResetEmail,
@@ -19,6 +22,45 @@ function Authentication({ title }) {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const navigate = useNavigate();
+  const provider = new GoogleAuthProvider();
+  const dispatch = useDispatch();
+
+  function signinWithGoogle() {
+    const auth = getAuth();
+    signInWithRedirect(auth, provider);
+  }
+
+  React.useEffect(() => {
+    const auth = getAuth();
+    getRedirectResult(auth)
+      .then((result) => {
+        // This gives you a Google Access Token. You can use it to access Google APIs.
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+
+        // The signed-in user info.
+        const user = result.user;
+        dispatch(signin(user.displayName));
+        navigate("/todo");
+        sessionStorage.setItem(
+            "Auth Token",
+            token
+          );
+        
+      })
+      .catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        
+        const errorMessage = error.message;
+        
+        // The email of the user's account used.
+        const email = error.email;
+        // The AuthCredential type that was used.
+        const credential = GoogleAuthProvider.credentialFromError(error);
+        // ...
+      });
+  },[]);
 
   const handleAction = (param) => {
     const authentication = getAuth();
@@ -44,8 +86,8 @@ function Authentication({ title }) {
     if (param === "Login") {
       signInWithEmailAndPassword(authentication, email, password)
         .then((response) => {
-            navigate("/todo");
-            toast("Login successfull");
+          navigate("/todo");
+          toast("Login successfull");
           sessionStorage.setItem(
             "Auth Token",
             response._tokenResponse.refreshToken
@@ -58,7 +100,6 @@ function Authentication({ title }) {
           if (error.code === "auth/user-not-found") {
             toast.error("Please check the Email");
           }
-          
         });
     }
   };
@@ -109,7 +150,7 @@ function Authentication({ title }) {
             <button onClick={() => handleAction(title)} type="button">
               {title}
             </button>
-            <div className="social-login google">
+            <div className="social-login google" onClick={signinWithGoogle}>
               <img src={google} alt="" />
               <p>{title} with Google</p>
             </div>
@@ -124,5 +165,6 @@ function Authentication({ title }) {
     </section>
   );
 }
+
 
 export default Authentication;

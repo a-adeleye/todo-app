@@ -4,6 +4,7 @@ import Projects from "./Projects";
 import { TaskStats, NoteStats, ProjectStats } from "./Stats";
 
 function Main(props) {
+
   const {
     view,
     tasks,
@@ -20,6 +21,8 @@ function Main(props) {
     filter,
     filteredTasks,
   } = props;
+
+
   return (
     <main>
       <header>
